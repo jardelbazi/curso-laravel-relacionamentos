@@ -1,21 +1,35 @@
 <?php
 
 use App\Models\{
-	User,
+    Course,
+    User,
 	Preference,
 };
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/one-to-many', function() {
+	$course = Course::with('modules.lessons')->first();
+
+	// Inserir novo módulo no curso
+	//$course->modules()->create(['name' => 'Módulo x2']);
+
+	$modules = $course->modules;
+
+	echo "<h1>{$course->name}</h1>";
+	echo '<hr>';
+
+	foreach ($course->modules as $module) {
+		echo "<h2>{$module->name}</h2>";
+		echo "<ul>";
+
+		foreach ($module->lessons as $lesson) {
+			echo "<li>{$lesson->name}</li>";
+		}
+
+		echo "</ul>";
+	}
+
+});
 
 Route::get('/one-to-one', function() {
 	$user = User::with('preference')->first();
@@ -37,6 +51,8 @@ Route::get('/one-to-one', function() {
 
 	dd($user->preference);
 });
+
+
 
 Route::get('/', function () {
     return view('welcome');
