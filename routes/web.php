@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\{
+    Comment,
     Course,
     Image,
     Permission,
@@ -9,7 +10,23 @@ use App\Models\{
 };
 use Illuminate\Support\Facades\Route;
 
-Route::get('/many-to-many-polymorphic', function() {
+Route::get('/one-to-many-polymorphic', function() {
+	//$course = Course::first();
+
+	// $course->comments()->create([
+	// 	'subject' => 'Novo Comentário 2',
+	// 	'content' => 'Apenas um comentário legal 2',
+	// ]);
+
+	//dd($course->comments);
+
+	$comment = Comment::find(1);
+	dd($comment->commentable);
+
+
+});
+
+Route::get('/one-to-one-polymorphic', function() {
 	$user = User::first();
 
 	// $user->image()->save(
