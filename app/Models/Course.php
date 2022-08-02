@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Course extends Model
 {
@@ -36,5 +37,10 @@ class Course extends Model
 	public function Comments(): MorphMany
 	{
 		return $this->morphMany(Comment::class, 'commentable');
+	}
+
+	public function tags(): MorphToMany
+	{
+		return $this->morphToMany(Tag::class, 'taggable');
 	}
 }

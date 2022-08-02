@@ -7,8 +7,34 @@ use App\Models\{
     Permission,
     User,
 	Preference,
+    Tag,
 };
 use Illuminate\Support\Facades\Route;
+
+Route::get('/many-to-many-polymorphic', function() {
+	$course = Course::first();
+
+	// $user->tags()->create([
+	// 	'name' => 'tag1',
+	// 	'color' => 'blue',
+	// ]);
+
+	// $user->tags()->create([
+	// 	'name' => 'tag2',
+	// 	'color' => 'red',
+	// ]);
+
+	// $user->tags()->create([
+	// 	'name' => 'tag3',
+	// 	'color' => 'green',
+	// ]);
+
+	// $course->tags()->attach(1);
+	// dd($course->tags);
+
+	$tag = Tag::find(1);
+	dd($tag->courses);
+});
 
 Route::get('/one-to-many-polymorphic', function() {
 	//$course = Course::first();
