@@ -51,6 +51,7 @@ class User extends Authenticatable
 
 	public function permissions(): BelongsToMany
 	{
-		return $this->belongsToMany(Permission::class);
+		return $this->belongsToMany(Permission::class)
+			->withPivot(['active']);
 	}
 }
